@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AspNetCore.Firebase.Authentication.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +20,11 @@ namespace FirebaseThirdPartyLogin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            var FirebaseAuthentication_Issuer = "https://securetoken.google.com/thirdpartylogin-9c8ee";
+            var FirebaseAuthentication_Audience = "thirdpartylogin-9c8ee";
+            services.AddFirebaseAuthentication(FirebaseAuthentication_Issuer,
+                                               FirebaseAuthentication_Audience);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +53,8 @@ namespace FirebaseThirdPartyLogin
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseAuthentication();
         }
     }
 }

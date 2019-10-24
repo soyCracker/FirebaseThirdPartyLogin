@@ -6,6 +6,34 @@
     <title>@ViewData["Title"] - FirebaseThirdPartyLogin</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig =
+        {
+            apiKey: "AIzaSyBWV7lVCQUhNPNQ8HJ2yw_D9vPy604qLAQ",
+            authDomain: "thirdpartylogin-9c8ee.firebaseapp.com",
+            databaseURL: "https://thirdpartylogin-9c8ee.firebaseio.com",
+            projectId: "thirdpartylogin-9c8ee",
+            storageBucket: "thirdpartylogin-9c8ee.appspot.com",
+            messagingSenderId: "237834925635",
+            appId: "1:237834925635:web:37bdc024baac882e2706f6",
+            measurementId: "G-QB73XMW87G"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
 </head>
 <body>
     <header>

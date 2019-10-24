@@ -2,7 +2,60 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+</head>
+<body>
+    <div id="title">
+        <h1>Hello World</h1>
+    </div>
+    <div id="logout-button">
+        <button v-on:click="logout">登出</button>
+    </div>
+
+    <script>
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        var app = new Vue({
+            el: '#logout-button',
+            methods:
+            {
+                logout: function () {
+                    firebase.auth().signOut().then(function () {
+                        // Sign-out successful.
+                    }).catch(function (error) {
+                        // An error happened.
+                    });
+                }
+            }
+        });
+
+        firebase.auth().onAuthStateChanged(function (user)
+        {
+            if (user)
+            {
+                // User is signed in.
+                var displayName = user.displayName;
+                console.log("displayName:"+displayName)
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                var userToken = user.getToken;
+                console.log("userToken:" + userToken);
+            }
+            else
+            {
+                
+                location.href = window.location.origin+'/login';
+            }
+        });
+
+    </script>
+</body>
+</html>
