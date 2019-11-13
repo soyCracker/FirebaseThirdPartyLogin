@@ -13,6 +13,6 @@ namespace FirebaseThirdPartyLogin.Models.AuthModel
         public bool EmailVerified { get; set; }
         public string PhotoURL { get; set; }
         public bool IsAnonymous { get; set; }
-        //public string ProviderData { get; set; }
+        public string ProviderData { get; set; }
     }
 }

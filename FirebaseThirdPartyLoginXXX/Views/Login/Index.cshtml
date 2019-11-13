@@ -1,4 +1,8 @@
-﻿
+﻿@page
+@model FirebaseThirdPartyLogin.Views.Login.IndexModel
+@{
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +43,7 @@
                 }
             }
         });
-
+       
         firebase.auth().onAuthStateChanged(function (user)
         {
             if (user)
@@ -48,7 +52,7 @@
             }
             else
             {
-
+                
             }
         });
 
