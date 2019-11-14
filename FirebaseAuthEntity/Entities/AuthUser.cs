@@ -11,6 +11,5 @@ namespace FirebaseAuthEntity.Entities
         public bool? EmailVerified { get; set; }
         public string PhotoUrl { get; set; }
         public bool? IsAnonymous { get; set; }
-        public string ProviderData { get; set; }
     }
 }

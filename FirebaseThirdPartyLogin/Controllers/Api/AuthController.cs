@@ -33,7 +33,6 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
             log.LogDebug("AuthController EmailVerified:" + vo.EmailVerified);
             log.LogDebug("AuthController PhotoURL:" + vo.PhotoURL);
             log.LogDebug("AuthController IsAnonymous:" + vo.IsAnonymous);
-            //log.LogDebug("AuthController ProviderData:" + vo.ProviderData);
             AuthUser existUser = context.AuthUser.SingleOrDefault(x => x.Id == vo.Uid);
             if (existUser == null)
             {
@@ -44,7 +43,6 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
                 newUser.EmailVerified = vo.EmailVerified;
                 newUser.IsAnonymous = vo.IsAnonymous;
                 newUser.PhotoUrl = vo.PhotoURL;
-                //newUser.ProviderData = vo.ProviderData;
                 context.AuthUser.Add(newUser);
                 context.SaveChanges();
             }
@@ -55,7 +53,6 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
                 existUser.EmailVerified = vo.EmailVerified;
                 existUser.IsAnonymous = vo.IsAnonymous;
                 existUser.PhotoUrl = vo.PhotoURL;
-                //existUser.ProviderData = vo.ProviderData;
                 context.SaveChanges();
             }
             return Ok(new { Value = true, ErrorCode = 0 });

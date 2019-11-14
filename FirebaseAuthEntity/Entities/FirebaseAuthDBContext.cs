@@ -46,10 +46,6 @@ namespace FirebaseAuthEntity.Entities
                     .HasColumnName("PhotoURL")
                     .HasMaxLength(256)
                     .IsUnicode(false);
-
-                entity.Property(e => e.ProviderData)
-                    .HasMaxLength(256)
-                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

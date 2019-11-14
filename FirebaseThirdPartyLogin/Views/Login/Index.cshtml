@@ -50,7 +50,7 @@
                 console.log("EmailVerified:" + user.emailVerified);
                 console.log("PhotoURL:" + user.photoURL);
                 console.log("IsAnonymous:" + user.isAnonymous);
-                console.log("ProviderData:" + user.providerData);
+                
                 var userData =
                 {
                     Uid : user.uid,
@@ -59,7 +59,6 @@
                     EmailVerified : user.emailVerified,
                     PhotoURL : user.photoURL,
                     IsAnonymous : user.isAnonymous,
-                    ProviderData : user.providerData
                 }
 
                 postData(window.location.origin + "/api/auth", userData)
@@ -74,6 +73,7 @@
                 .post(url,data)
                 .then(res => {
                     console.log(res);
+                    //跳轉回首頁
                     location.href = window.location.origin;
                 })
 	            .catch(err=>{ console.log(err) })
