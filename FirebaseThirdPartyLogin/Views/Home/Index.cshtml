@@ -34,42 +34,12 @@
 
         firebase.auth().onAuthStateChanged(function (user)
         {
-            if (user)
-            {
-                // User is signed in.
-                console.log("Uid:" + user.uid);
-                console.log("DisplayName:" + user.displayName);
-                console.log("Email:" + user.email);
-                console.log("EmailVerified:" + user.emailVerified);
-                console.log("PhotoURL:" + user.photoURL);
-                console.log("IsAnonymous:" + user.isAnonymous);
-                console.log("ProviderData:" + user.providerData);
-                var userData =
-                {
-                    Uid : user.uid,
-                    DisplayName : user.displayName,
-                    Email : user.email,
-                    EmailVerified : user.emailVerified,
-                    PhotoURL : user.photoURL,
-                    IsAnonymous : user.isAnonymous,
-                    ProviderData : user.providerData
-                }
-
-                console.log("response:" + postData(window.location.origin + "/api/auth", userData));
-            }
+            if (user){}
             else
             {
                 location.href = window.location.origin+'/login';
             }
         });
-
-        function postData(url, data)
-        {
-            axios
-                .post(url,data)
-	            .then(res=>{ console.log(res) })
-	            .catch(err=>{ console.log(err) })
-        }
 
     </script>
 </body>

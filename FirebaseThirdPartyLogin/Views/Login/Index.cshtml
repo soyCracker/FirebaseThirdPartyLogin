@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -44,13 +43,41 @@
         {
             if (user)
             {
-                location.href = window.location.origin;
+                // User is signed in.
+                console.log("Uid:" + user.uid);
+                console.log("DisplayName:" + user.displayName);
+                console.log("Email:" + user.email);
+                console.log("EmailVerified:" + user.emailVerified);
+                console.log("PhotoURL:" + user.photoURL);
+                console.log("IsAnonymous:" + user.isAnonymous);
+                console.log("ProviderData:" + user.providerData);
+                var userData =
+                {
+                    Uid : user.uid,
+                    DisplayName : user.displayName,
+                    Email : user.email,
+                    EmailVerified : user.emailVerified,
+                    PhotoURL : user.photoURL,
+                    IsAnonymous : user.isAnonymous,
+                    ProviderData : user.providerData
+                }
+
+                postData(window.location.origin + "/api/auth", userData)
             }
             else
-            {
-
-            }
+            {}
         });
+
+        function postData(url, data)
+        {
+            axios
+                .post(url,data)
+                .then(res => {
+                    console.log(res);
+                    location.href = window.location.origin;
+                })
+	            .catch(err=>{ console.log(err) })
+        }
 
     </script>
 </body>
