@@ -13,7 +13,7 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
     public class AuthController : Controller
     {
         private readonly FirebaseAuthDBContext context;
-        private readonly ILogger log;
+        private readonly ILogger log;    
 
         public AuthController(FirebaseAuthDBContext context, ILogger<AuthController> log)
         {
@@ -31,6 +31,14 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
             log.LogDebug("AuthController EmailVerified:" + vo.EmailVerified);
             log.LogDebug("AuthController PhotoURL:" + vo.PhotoURL);
             log.LogDebug("AuthController IsAnonymous:" + vo.IsAnonymous);
+
+            UpdateUserInDB(vo);
+            Response.Cookies.Append("AccessToken", GetToken(vo.Uid, vo.DisplayName));
+            return Ok(new { Value = true, ErrorCode = 0 });
+        }
+
+        private void UpdateUserInDB(AuthVO vo)
+        {
             AuthUser existUser = context.AuthUser.SingleOrDefault(x => x.Id == vo.Uid);
             if (existUser == null)
             {
@@ -53,17 +61,13 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
                 existUser.PhotoUrl = vo.PhotoURL;
                 context.SaveChanges();
             }
-            return Ok(new { Value = true, ErrorCode = 0 });
         }
 
-        /*[HttpPost]
-        [Route("[action]")]
-        public IActionResult GetToken([FromBody]GetTokenVO vo)
+        private string GetToken(string uid, string username)
         {
             string issuser = "JwtAuthDemo";
             int expires = 30;//minute
-            string accessToken = JwtService.GenerateToken(issuser, vo.Uid, vo.Username, expires);
-            return Ok(new { Value = true, ErrorCode = 0, AccessToken = accessToken });
-        }*/
+            return JwtService.GenerateToken(issuser, uid, username, expires);
+        }
     }
 }
