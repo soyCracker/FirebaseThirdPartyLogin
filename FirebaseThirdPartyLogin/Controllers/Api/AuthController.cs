@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using FirebaseAuthEntity.Entities;
+using FirebaseThirdPartyLogin.BusinessLogic.JWT;
 using FirebaseThirdPartyLogin.Models.AuthModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -57,5 +55,15 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
             }
             return Ok(new { Value = true, ErrorCode = 0 });
         }
+
+        /*[HttpPost]
+        [Route("[action]")]
+        public IActionResult GetToken([FromBody]GetTokenVO vo)
+        {
+            string issuser = "JwtAuthDemo";
+            int expires = 30;//minute
+            string accessToken = JwtService.GenerateToken(issuser, vo.Uid, vo.Username, expires);
+            return Ok(new { Value = true, ErrorCode = 0, AccessToken = accessToken });
+        }*/
     }
 }
