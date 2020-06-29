@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
 </head>
+
 <body>
     <div id="title">
         <transition name="fade">
@@ -19,21 +20,15 @@
     </div>
 
     <p><p>
-
-    <div id="logout-button">
-        <button v-on:click="logout">登出</button>
-    </div>
-
+    <script src="~/js/logout.js" asp-append-version="true"></script>
     <script>
-        var provider = new firebase.auth.GoogleAuthProvider();
-
         var setTitle = new Vue({
             el: '#title',
             data:
             {
                 text: 'Vue我來了',
                 seen: true,
-                arr:['111', '我', '三']
+                arr: ['111', '我', '三']
             },
             methods:
             {
@@ -41,7 +36,7 @@
                     if (this.seen) {
                         this.seen = false
                     }
-                    else {                      
+                    else {
                         this.seen = true
                         this.text = this.arr[1]
                     }
@@ -49,36 +44,6 @@
                 }
             }
         });
-
-        var logout = new Vue({
-            el: '#logout-button',
-            methods:
-            {
-                logout: function () {
-                    firebase.auth().signOut().then(function () {
-                        // Sign-out successful.
-                    }).catch(function (error) {
-                        // An error happened.
-                    });
-                }
-            }
-        });
-
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                // User is signed in.
-                console.log("Uid:" + user.uid);
-                console.log("DisplayName:" + user.displayName);
-                console.log("Email:" + user.email);
-                console.log("EmailVerified:" + user.emailVerified);
-                console.log("PhotoURL:" + user.photoURL);
-                console.log("IsAnonymous:" + user.isAnonymous);
-            }
-            else {
-                location.href = window.location.origin + '/login';
-            }
-        });
-
     </script>
 </body>
 </html>
