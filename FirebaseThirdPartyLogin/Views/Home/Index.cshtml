@@ -9,8 +9,17 @@
 </head>
 <body>
     <div id="title">
-        <h1>Hello World</h1>
+        <transition name="fade">
+            <h1 v-if="seen">{{text}}</h1>
+        </transition>
+        <p><p>
+        <button v-on:click="reverse">reverse</button>
+        <p><p>
+        <input v-model="text">
     </div>
+
+    <p><p>
+
     <div id="logout-button">
         <button v-on:click="logout">登出</button>
     </div>
@@ -18,7 +27,30 @@
     <script>
         var provider = new firebase.auth.GoogleAuthProvider();
 
-        var app = new Vue({
+        var setTitle = new Vue({
+            el: '#title',
+            data:
+            {
+                text: 'Vue我來了',
+                seen: true,
+                arr:['111', '我', '三']
+            },
+            methods:
+            {
+                reverse: function () {
+                    if (this.seen) {
+                        this.seen = false
+                    }
+                    else {                      
+                        this.seen = true
+                        this.text = this.arr[1]
+                    }
+                    this.text = this.text.split('').reverse().join('')
+                }
+            }
+        });
+
+        var logout = new Vue({
             el: '#logout-button',
             methods:
             {
@@ -32,10 +64,8 @@
             }
         });
 
-        firebase.auth().onAuthStateChanged(function (user)
-        {
-            if (user)
-            {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
                 // User is signed in.
                 console.log("Uid:" + user.uid);
                 console.log("DisplayName:" + user.displayName);
@@ -44,9 +74,8 @@
                 console.log("PhotoURL:" + user.photoURL);
                 console.log("IsAnonymous:" + user.isAnonymous);
             }
-            else
-            {
-                location.href = window.location.origin+'/login';
+            else {
+                location.href = window.location.origin + '/login';
             }
         });
 
