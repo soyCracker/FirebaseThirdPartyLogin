@@ -2,6 +2,9 @@
 
 var app = new Vue({
     el: '#logout-button',
+    data: {
+        logoutBtnSeen:true
+    },
     methods:
     {
         logout: function () {
@@ -15,26 +18,8 @@ var app = new Vue({
     }
 });
 
-var app2 = new Vue({
-    el: '#logout-button',
-    data:
-    {
-        seen: true
-    },
-    methods:
-    {
-        switchSeen: function () {
-            seen = true;
-        }
-    }
-});
-
 firebase.auth().onAuthStateChanged(function (user) {
-    if (user)
-    {
-        
-    }
-    else
+    if (!user)
     {
         location.href = window.location.origin + '/login';
     }

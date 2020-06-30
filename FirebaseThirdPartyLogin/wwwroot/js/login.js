@@ -26,6 +26,13 @@ var app = new Vue({
     }
 });
 
+var app2 = new Vue({
+    el: '#logout-button',
+    data: {
+        logoutBtnSeen:false
+    }
+});
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         
