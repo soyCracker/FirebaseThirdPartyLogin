@@ -17,5 +17,5 @@ var firebaseConfig =
   
 FirebaseAuthEntity FirebaseAuthDBContext.cs UseSqlServer change to yours
 ```C#
-optionsBuilder.UseSqlServer("Server=DESKTOP-6A0C6G6\\SQLEXPRESS;Database=FirebaseAuthDB;Trusted_Connection=True;");
+optionsBuilder.UseSqlServer("yours");
 ```
