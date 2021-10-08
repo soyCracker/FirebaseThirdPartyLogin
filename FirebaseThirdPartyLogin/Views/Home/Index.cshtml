@@ -11,7 +11,7 @@
 <body>
     <div id="title">
         <transition name="fade">
-            <h1 v-if="seen">{{text}}</h1>
+            <h1>{{text}}</h1>
         </transition>
         <p><p>
         <button v-on:click="reverse">reverse</button>
@@ -26,20 +26,11 @@
             el: '#title',
             data:
             {
-                text: 'Vue我來了',
-                seen: true,
-                arr: ['111', '我', '三']
+                text: 'ASP NET Core',
             },
             methods:
             {
                 reverse: function () {
-                    if (this.seen) {
-                        this.seen = false
-                    }
-                    else {
-                        this.seen = true
-                        this.text = this.arr[1]
-                    }
                     this.text = this.text.split('').reverse().join('')
                 }
             }

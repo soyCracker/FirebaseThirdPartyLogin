@@ -2,6 +2,7 @@
 using FirebaseAuthEntity.Entities;
 using FirebaseThirdPartyLogin.BusinessLogic.JWT;
 using FirebaseThirdPartyLogin.Models.AuthModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -25,6 +26,7 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
         [HttpPost]
         public IActionResult Index([FromBody]AuthVO vo)
         {
+            log.LogDebug("AuthController AccessToken:" + vo.AccessToken);
             log.LogDebug("AuthController Uid:" + vo.Uid);
             log.LogDebug("AuthController DisplayName:" + vo.DisplayName);
             log.LogDebug("AuthController Email:" + vo.Email);
@@ -33,7 +35,18 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
             log.LogDebug("AuthController IsAnonymous:" + vo.IsAnonymous);
 
             UpdateUserInDB(vo);
-            Response.Cookies.Append("AccessToken", GetToken(vo.Uid, vo.DisplayName));
+            Response.Cookies.Append("AccessToken", vo.AccessToken);
+            return Ok(new { Value = true, ErrorCode = 0 });
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        [Route("Test")]
+        public IActionResult Test()
+        {
+            log.LogDebug("Good Auth");
+            
             return Ok(new { Value = true, ErrorCode = 0 });
         }
 

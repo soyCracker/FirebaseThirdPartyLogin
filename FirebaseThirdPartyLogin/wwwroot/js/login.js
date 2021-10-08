@@ -45,27 +45,35 @@ firebase.auth().onAuthStateChanged(function (user) {
         console.log("PhotoURL:" + user.photoURL);
         console.log("IsAnonymous:" + user.isAnonymous);
 
-        var userData =
-        {
-            Uid: user.uid,
-            DisplayName: user.displayName,
-            Email: user.email,
-            EmailVerified: user.emailVerified,
-            PhotoURL: user.photoURL,
-            IsAnonymous: user.isAnonymous,
-        }
+        firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+            console.log("ID Token: ", idToken);
+            console.log("test");
 
-        postData(window.location.origin + "/api/auth", userData)
+            var userData =
+            {
+                ['AccessToken']: idToken,
+                ['Uid']: user.uid,
+                ['DisplayName']: user.displayName,
+                ['Email']: user.email,
+                ['EmailVerified']: user.emailVerified,
+                ['PhotoURL']: user.photoURL,
+                ['IsAnonymous']: user.isAnonymous,
+            };
+
+            postData(window.location.origin + "/api/auth", userData)
+        }).catch(function (error) {
+            // Handle error
+
+        });
     }
 });
 
 function postData(url, data) {
-    axios
-        .post(url, data)
+    axios.post(url, data)
         .then(res => {
             console.log(res);
             //跳轉回首頁
-            location.href = window.location.origin;
+            //location.href = window.location.origin;
         })
         .catch(err => { console.log(err) })
 }

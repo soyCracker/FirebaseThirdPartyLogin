@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29326.143
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FirebaseAuthDB", "FirebaseAuthDB\FirebaseAuthDB.sqlproj", "{264AAF81-3B75-4CC0-87F0-4766D12F3C13}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebaseAuthEntity", "FirebaseAuthEntity\FirebaseAuthEntity.csproj", "{3E953531-6056-4801-BC35-CA22E95C0C8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseThirdPartyLogin", "FirebaseThirdPartyLogin\FirebaseThirdPartyLogin.csproj", "{1F40B5E5-5683-41DD-A33B-8EA60D63230D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirebaseThirdPartyLogin", "FirebaseThirdPartyLogin\FirebaseThirdPartyLogin.csproj", "{1F40B5E5-5683-41DD-A33B-8EA60D63230D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseConfiguration", "BaseConfiguration\BaseConfiguration.csproj", "{3E829BBA-BFB6-4223-A302-270CB657A4F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{1F40B5E5-5683-41DD-A33B-8EA60D63230D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F40B5E5-5683-41DD-A33B-8EA60D63230D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F40B5E5-5683-41DD-A33B-8EA60D63230D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E829BBA-BFB6-4223-A302-270CB657A4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E829BBA-BFB6-4223-A302-270CB657A4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E829BBA-BFB6-4223-A302-270CB657A4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E829BBA-BFB6-4223-A302-270CB657A4F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

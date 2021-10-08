@@ -7,6 +7,7 @@ namespace FirebaseThirdPartyLogin.Models.AuthModel
 {
     public class AuthVO
     {
+        public string AccessToken { get; set; }
         public string Uid { get; set; }
         public string DisplayName { get; set; }
         public string Email { get; set; }
