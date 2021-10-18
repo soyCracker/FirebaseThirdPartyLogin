@@ -16,8 +16,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BaseConfiguration\BaseConfiguration.csproj" />
-  </ItemGroup>
-
 </Project>

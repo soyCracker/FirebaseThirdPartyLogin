@@ -73,7 +73,7 @@ function postData(url, data) {
         .then(res => {
             console.log(res);
             //跳轉回首頁
-            //location.href = window.location.origin;
+            location.href = window.location.origin;
         })
         .catch(err => { console.log(err) })
 }

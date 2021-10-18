@@ -1,7 +1,4 @@
-﻿using System;
-using BaseConfiguration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace FirebaseAuthEntity.Entities
 {
@@ -23,7 +20,7 @@ namespace FirebaseAuthEntity.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(Config.DB_CONN);
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=FirebaseAuthDB;Trusted_Connection=True;ConnectRetryCount=0");
             }
         }
 

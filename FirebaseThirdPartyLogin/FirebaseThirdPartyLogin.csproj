@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BaseConfiguration\BaseConfiguration.csproj" />
-    <ProjectReference Include="..\FirebaseAuthEntity\FirebaseAuthEntity.csproj" />
+    <ProjectReference Include="..\FirebaseAuth.Service\FirebaseAuth.Service.csproj" />
   </ItemGroup>
 
 </Project>

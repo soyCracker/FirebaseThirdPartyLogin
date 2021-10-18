@@ -1,6 +1,5 @@
-﻿using System.Linq;
+﻿using FirebaseAuth.Service.Services;
 using FirebaseAuthEntity.Entities;
-using FirebaseThirdPartyLogin.BusinessLogic.JWT;
 using FirebaseThirdPartyLogin.Models.AuthModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +12,14 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
-        private readonly FirebaseAuthDBContext context;
+        private AuthUserService authUserService;
         private readonly ILogger log;    
 
-        public AuthController(FirebaseAuthDBContext context, ILogger<AuthController> log)
+        public AuthController(ILogger<AuthController> log)
         {
-            this.context = context;
             this.log = log;
             log.LogDebug("AuthController");
+            authUserService = new AuthUserService();
         }
 
         [HttpPost]
@@ -34,11 +33,21 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
             log.LogDebug("AuthController PhotoURL:" + vo.PhotoURL);
             log.LogDebug("AuthController IsAnonymous:" + vo.IsAnonymous);
 
-            UpdateUserInDB(vo);
-            Response.Cookies.Append("AccessToken", vo.AccessToken);
+            UpdateUser(vo);
             return Ok(new { Value = true, ErrorCode = 0 });
         }
 
+        private void UpdateUser(AuthVO vo)
+        {
+            AuthUser newUser = new AuthUser();
+            newUser.Id = vo.Uid;
+            newUser.DisplayName = vo.DisplayName;
+            newUser.Email = vo.Email;
+            newUser.EmailVerified = vo.EmailVerified;
+            newUser.IsAnonymous = vo.IsAnonymous;
+            newUser.PhotoUrl = vo.PhotoURL;
+            authUserService.UpdateUser(newUser);
+        }
 
         [HttpPost]
         [Authorize]
@@ -46,41 +55,8 @@ namespace FirebaseThirdPartyLogin.Controllers.Api
         public IActionResult Test()
         {
             log.LogDebug("Good Auth");
-            
+
             return Ok(new { Value = true, ErrorCode = 0 });
-        }
-
-        private void UpdateUserInDB(AuthVO vo)
-        {
-            AuthUser existUser = context.AuthUser.SingleOrDefault(x => x.Id == vo.Uid);
-            if (existUser == null)
-            {
-                AuthUser newUser = new AuthUser();
-                newUser.Id = vo.Uid;
-                newUser.DisplayName = vo.DisplayName;
-                newUser.Email = vo.Email;
-                newUser.EmailVerified = vo.EmailVerified;
-                newUser.IsAnonymous = vo.IsAnonymous;
-                newUser.PhotoUrl = vo.PhotoURL;
-                context.AuthUser.Add(newUser);
-                context.SaveChanges();
-            }
-            else
-            {
-                existUser.DisplayName = vo.DisplayName;
-                existUser.Email = vo.Email;
-                existUser.EmailVerified = vo.EmailVerified;
-                existUser.IsAnonymous = vo.IsAnonymous;
-                existUser.PhotoUrl = vo.PhotoURL;
-                context.SaveChanges();
-            }
-        }
-
-        private string GetToken(string uid, string username)
-        {
-            string issuser = "JwtAuthDemo";
-            int expires = 30;//minute
-            return JwtService.GenerateToken(issuser, uid, username, expires);
         }
     }
 }

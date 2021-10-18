@@ -1,6 +1,5 @@
-using AspNetCore.Firebase.Authentication.Extensions;
-using BaseConfiguration;
 using FirebaseAuthEntity.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,26 +24,25 @@ namespace FirebaseThirdPartyLogin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            var connection = Config.DB_CONN;
-            services.AddDbContext<FirebaseAuthDBContext>(options => options.UseSqlServer(connection));
-            /*services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddDbContext<FirebaseAuthDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Dev")));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
-                        options.Authority = "https://securetoken.google.com/1:237834925635:web:37bdc024baac882e2706f6";
+                        options.Authority = "https://securetoken.google.com/thirdpartylogin-9c8ee";
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             ValidateIssuer = true,
-                            ValidIssuer = "https://securetoken.google.com/1:237834925635:web:37bdc024baac882e2706f6",
+                            ValidIssuer = "https://securetoken.google.com/thirdpartylogin-9c8ee",
                             ValidateAudience = true,
-                            ValidAudience = "1:237834925635:web:37bdc024baac882e2706f6",
+                            ValidAudience = "thirdpartylogin-9c8ee",
                             ValidateLifetime = true
                         };
-                    });*/
+                    }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            var FirebaseAuthentication_Issuer = "https://securetoken.google.com/thirdpartylogin-9c8ee";
+            /*var FirebaseAuthentication_Issuer = "https://securetoken.google.com/thirdpartylogin-9c8ee";
             var FirebaseAuthentication_Audience = "thirdpartylogin-9c8ee";
             services.AddFirebaseAuthentication(FirebaseAuthentication_Issuer,
-                                               FirebaseAuthentication_Audience);
+                                               FirebaseAuthentication_Audience);*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

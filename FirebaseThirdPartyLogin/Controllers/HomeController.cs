@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FirebaseThirdPartyLogin.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FirebaseThirdPartyLogin.Controllers
 {
@@ -23,6 +24,7 @@ namespace FirebaseThirdPartyLogin.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
